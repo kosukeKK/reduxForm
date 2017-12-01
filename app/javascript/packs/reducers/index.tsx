@@ -1,6 +1,6 @@
-import {createStore} from 'redux';
+import { createStore } from 'redux';
 import { combineReducers } from 'redux';
-import {reducer as formReducer} from 'redux-form';
+import { reducer as formReducer } from 'redux-form';
 const initialState = 'sample';
 
 const sample = (state = initialState, action: any) => {
