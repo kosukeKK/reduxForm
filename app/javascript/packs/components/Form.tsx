@@ -1,22 +1,37 @@
 import * as React from 'react';
 import { Field, reduxForm } from 'redux-form';
-const required = (value: any) => (value ? undefined : 'Required');
+import validation from '../validate/formValidation';
+const renderField = (that: any) => {
+    const { input, type, label } = that;
+    const { touched, error, warning } = that.meta;
+    return (
+        <div>
+            <label>{label}</label>
+            <input {...input} placeholder={label} type={type} />
+            {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
+        </div>
+    );
+};
 
 let ContactForm = (that: any) => {
     return (
         <form onSubmit={that.handleSubmit}>
-            <label>name</label>
             <Field
+                label='Name'
                 name='name'
-                validate={[ required ]}
+                component={renderField}
+                validate={[validation.required, validation.maxLength15, validation.minLength2]}
+                warn={[validation.required, validation.alphaNumeric]}
                 type='text'
                 placeholder='名前を入力'
             /><br />
 
-            <label>Email</label>
             <Field
+                label='E-mail'
                 name='email'
-                component='input'
+                component={renderField}
+                validate={[validation.required, validation.email]}
+                warn={validation.aol}
                 type='email'
                 placeholder='Email'
             /><br />
@@ -24,6 +39,7 @@ let ContactForm = (that: any) => {
             <label>
                 <Field
                     name='sex'
+                    checked='checked'
                     component='input'
                     type='radio'
                     value='male'
@@ -43,7 +59,6 @@ let ContactForm = (that: any) => {
 
             <label>Favorite Color</label>
             <Field name='favoriteColor' component='select'>
-                <option />
                 <option value='ff0000'>Red</option>
                 <option value='00ff00'>Green</option>
                 <option value='0000ff'>Blue</option>
