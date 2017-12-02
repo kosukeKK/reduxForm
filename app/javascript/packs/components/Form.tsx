@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Field, reduxForm } from 'redux-form';
-
+const required = (value: any) => (value ? undefined : 'Required');
 
 let ContactForm = (that: any) => {
     return (
@@ -8,7 +8,7 @@ let ContactForm = (that: any) => {
             <label>name</label>
             <Field
                 name='name'
-                component='input'
+                validate={[ required ]}
                 type='text'
                 placeholder='名前を入力'
             /><br />
@@ -39,7 +39,7 @@ let ContactForm = (that: any) => {
                     value='female'
                 />{' '}
                 Female
-          </label>
+          </label><br />
 
             <label>Favorite Color</label>
             <Field name='favoriteColor' component='select'>
@@ -69,7 +69,6 @@ const validate = (values: any) => {
     } else if (values.username.length > 15) {
         errors.username = 'Must be 15 characters or less';
     }
-    console.log(values);
     return errors;
 };
 
@@ -78,3 +77,8 @@ export default reduxForm({
     form: 'ContactForm',
     validate,
 })(ContactForm);
+
+
+//バリデーション
+// モデルに保存
+// 送信したら全てクリア
