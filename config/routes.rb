@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
   root 'top#index'
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  namespace :api do
+    namespace :v1 do
+      namespace :users do
+        get '/', action: 'index'
+        post '/', action: 'create'
+      end
+    end
+  end
 end

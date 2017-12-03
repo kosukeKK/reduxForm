@@ -11,13 +11,13 @@ const App = (that: any) => (
 );
 
 const submitData = (dispatch: any, res: any) => {
-    axios.post('url', res)
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
+    axios.post('/api/v1/users.json', { user: res },
+        { headers: { 'ContentType': 'application/json' } },
+    ).then((r) => (
+        console.log(r)
+    )).catch((e) => (
+        console.error(e)
+    ));
     dispatch({ type: 'ADD_USER', res });
 };
 
