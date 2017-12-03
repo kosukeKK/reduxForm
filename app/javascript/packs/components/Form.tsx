@@ -39,7 +39,6 @@ let ContactForm = (that: any) => {
             <label>
                 <Field
                     name='sex'
-                    checked='checked'
                     component='input'
                     type='radio'
                     value='male'
@@ -59,6 +58,7 @@ let ContactForm = (that: any) => {
 
             <label>Favorite Color</label>
             <Field name='favoriteColor' component='select'>
+                <option />
                 <option value='ff0000'>Red</option>
                 <option value='00ff00'>Green</option>
                 <option value='0000ff'>Blue</option>
