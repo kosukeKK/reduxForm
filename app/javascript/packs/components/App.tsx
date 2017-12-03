@@ -1,17 +1,20 @@
-import * as React  from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import ContactForm from '../components/Form';
+//import { addUser } from '../actions'
 
-const App = () => {
-    const submitData = (values: any) => {
-        console.log(values);
-    };
-    return (
-        <div>
-            hello
-            <ContactForm onSubmit={submitData} />
-        </div>
-    );
+const App = (that: any) => (
+    <div>
+        hello
+        <ContactForm onSubmit={(e) => submitData(that.dispatch, e)} />
+    </div>
+);
+
+const submitData = (dispatch: any, res: any) => {
+    dispatch({ type: 'ADD_USER', res });
 };
 
-export default connect()(App);
+const mapStateToProps = (state: number) => {
+    return { state };
+};
+export default connect(mapStateToProps)(App);

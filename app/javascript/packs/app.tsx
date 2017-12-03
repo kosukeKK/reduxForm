@@ -1,8 +1,11 @@
 import * as React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import store from './reducers';
+import reducer from './reducers';
 import App from './components/App';
+import { createStore } from 'redux';
+
+const store = createStore(reducer);
 
 render(
     <Provider store={store}>
@@ -10,6 +13,3 @@ render(
     </Provider>,
     document.getElementById('root'),
 );
-
-
-
